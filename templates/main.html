@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{%block title%}
+To-Do List
+{%endblock%}
+
+{%block body%}
+{%for i in todo%}
+<div class="todo">
+  <h1>{{i.title}}</h1>
+  <h3>{{i.text}}</h3>
+</div>
+
+{%endfor%}
+
+{%endblock%}
