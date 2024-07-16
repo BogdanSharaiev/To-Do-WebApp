@@ -5,12 +5,44 @@ To-Do List
 {%endblock%}
 
 {%block body%}
-{%for i in todo%}
-<div class="todo">
-  <h1>{{i.title}}</h1>
-  <h3>{{i.text}}</h3>
-</div>
+<style>
+  .todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
 
-{%endfor%}
+  .todo {
+    width: 50%;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+
+  .todo h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .todo h3 {
+    font-size: 18px;
+    color: #666;
+  }
+</style>
+
+<div class="todo-container">
+  {% for i in todo %}
+    <div class="todo">
+      <h1>{{ i.title }}</h1>
+      <h3>{{ i.text }}</h3>
+      <a href="/change/{{i.do_id}}" class="btn">Detail</a>
+    </div>
+  {% endfor %}
+</div>
 
 {%endblock%}

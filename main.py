@@ -59,11 +59,34 @@ def index():
 
 
 
+@app.route('/change/<int:id>')
+def change(id):
+    info = ToDo.query.get(id)
+    if info:
+        return render_template('change.html',info=info)
+    return "GG"
 
+@app.route('/change/<int:id>/del')
+def delete(id):
+    info = ToDo.query.get(id)
+    try:
+        db.session.delete(info)
+        db.session.commit()
+        return redirect(url_for('main'))
+    except:
+        return "Cant delete this shiet"
 
-
-
-
+@app.route('/change/<int:id>/update',methods=['GET','POST'])
+def update(id):
+    info = ToDo.query.get(id)
+    if request.method == "POST":
+        title = request.form['title']
+        text = request.form['text']
+        info.title = title
+        info.text = text
+        db.session.commit()
+        return redirect(f"/change/{id}")
+    return render_template('update.html',info=info)
 
 
 
